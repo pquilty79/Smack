@@ -479,6 +479,11 @@ static CGFloat scaledValue( CGFloat v1, CGFloat min2, CGFloat max2, CGFloat min1
     return _view.bounds;
 }
 
+- (void)pauseInteractiveTransition { 
+    <#code#>
+}
+
+
 @end
 
 
@@ -1398,21 +1403,21 @@ const int FrontViewPositionNone = 0xff;
 // Primitive method for view controller deployment and animated layout to the given position.
 - (void)_setFrontViewPosition:(FrontViewPosition)newPosition withDuration:(NSTimeInterval)duration
 {
-    void (^rearDeploymentCompletion)() = [self _rearViewDeploymentForNewFrontViewPosition:newPosition];
-    void (^rightDeploymentCompletion)() = [self _rightViewDeploymentForNewFrontViewPosition:newPosition];
-    void (^frontDeploymentCompletion)() = [self _frontViewDeploymentForNewFrontViewPosition:newPosition];
+    void (^rearDeploymentCompletion)(void) = [self _rearViewDeploymentForNewFrontViewPosition:newPosition];
+    void (^rightDeploymentCompletion)(void) = [self _rightViewDeploymentForNewFrontViewPosition:newPosition];
+    void (^frontDeploymentCompletion)(void) = [self _frontViewDeploymentForNewFrontViewPosition:newPosition];
     
-    void (^animations)() = ^()
+    void (^animations)(void) = ^()
     {
         // Calling this in the animation block causes the status bar to appear/dissapear in sync with our own animation
         [self setNeedsStatusBarAppearanceUpdate];
         
         // We call the layoutSubviews method on the contentView view and send a delegate, which will
         // occur inside of an animation block if any animated transition is being performed
-        [_contentView layoutSubviews];
+        [self->_contentView layoutSubviews];
     
-        if ([_delegate respondsToSelector:@selector(revealController:animateToPosition:)])
-            [_delegate revealController:self animateToPosition:_frontViewPosition];
+        if ([self->_delegate respondsToSelector:@selector(revealController:animateToPosition:)])
+            [self->_delegate revealController:self animateToPosition:self->_frontViewPosition];
     };
     
     void (^completion)(BOOL) = ^(BOOL finished)
@@ -1455,7 +1460,7 @@ const int FrontViewPositionNone = 0xff;
     UIView *view = nil;
     
     if ( operation == SWRevealControllerOperationReplaceRearController )
-        old = _rearViewController, _rearViewController = new, view = _contentView.rearView;
+        old = _rearViewController, (void)(_rearViewController = new), view = _contentView.rearView;
     
     else if ( operation == SWRevealControllerOperationReplaceFrontController )
         old = _frontViewController, _frontViewController = new, view = _contentView.frontView;
@@ -1468,8 +1473,8 @@ const int FrontViewPositionNone = 0xff;
     void (^animationCompletion)() = ^
     {
         completion();
-        if ( [_delegate respondsToSelector:@selector(revealController:didAddViewController:forOperation:animated:)] )
-            [_delegate revealController:self didAddViewController:new forOperation:operation animated:animated];
+        if ( [self->_delegate respondsToSelector:@selector(revealController:didAddViewController:forOperation:animated:)] )
+            [self->_delegate revealController:self didAddViewController:new forOperation:operation animated:animated];
     
         [self _dequeue];
     };
