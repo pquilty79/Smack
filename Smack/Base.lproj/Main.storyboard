@@ -52,9 +52,31 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="erc-VV-Woh">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNP-gR-NFJ">
+                                        <rect key="frame" x="12" y="47" width="24" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="06e-Fq-rwJ"/>
+                                            <constraint firstAttribute="width" constant="24" id="u4t-yS-Ejk"/>
+                                        </constraints>
+                                        <state key="normal" image="smackBurger">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Smack" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ksg-mR-4aO">
+                                        <rect key="frame" x="161.5" y="46" width="52" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" red="0.29019607843137252" green="0.30196078431372547" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="YNP-gR-NFJ" secondAttribute="bottom" constant="12" id="5ek-Ag-KeS"/>
                                     <constraint firstAttribute="height" constant="77" id="GxF-pG-Ivk"/>
+                                    <constraint firstItem="ksg-mR-4aO" firstAttribute="centerX" secondItem="erc-VV-Woh" secondAttribute="centerX" id="RDL-GH-57q"/>
+                                    <constraint firstItem="YNP-gR-NFJ" firstAttribute="leading" secondItem="erc-VV-Woh" secondAttribute="leading" constant="12" id="e3l-yj-RRq"/>
+                                    <constraint firstItem="ksg-mR-4aO" firstAttribute="centerY" secondItem="YNP-gR-NFJ" secondAttribute="centerY" id="yro-KP-Kk1"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -66,10 +88,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fXk-tQ-zwx"/>
                     </view>
+                    <connections>
+                        <outlet property="menuButtun" destination="YNP-gR-NFJ" id="8LA-4O-TGP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BO6-Kh-DPz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1576.8" y="507.79610194902551"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="smackBurger" width="40" height="40"/>
+    </resources>
 </document>
