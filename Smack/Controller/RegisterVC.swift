@@ -1,5 +1,5 @@
 //
-//  LoginVC.swift
+//  RegisterVC.swift
 //  Smack
 //
 //  Created by Patrick Quilty on 7/8/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginVC: UIViewController {
+class RegisterVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,12 +16,10 @@ class LoginVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func cancelPressed(_ sender: Any) {
+    @IBAction func cancelButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func registerButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: TO_CREATE_ACCOUNT, sender: nil)
-    }
-    
+
+
 }
