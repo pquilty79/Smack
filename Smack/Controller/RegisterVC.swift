@@ -16,10 +16,8 @@ class RegisterVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func cancelButtonPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    @IBAction func unwindToChannel(_ sender: Any) { performSegue(withIdentifier: UNWIND, sender: nil)
     }
     
-
 
 }
