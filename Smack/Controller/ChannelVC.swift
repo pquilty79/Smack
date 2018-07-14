@@ -18,15 +18,21 @@ class ChannelVC: UIViewController {
     }
     
     
+
+// Actions
+    @IBAction func loginButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: TO_LOGIN, sender: nil)
+    }
+    
+    @IBAction func addChannelButtonPressed(_ sender: Any) {
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.revealViewController()?.rearViewRevealWidth = self.view.frame.size.width - 60
         
     }
-    
-    @IBAction func loginButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: TO_LOGIN, sender: nil)
-    }
-    
 
 }
