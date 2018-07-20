@@ -21,6 +21,7 @@ class RegisterVC: UIViewController {
     // Variables
     var avatarName = ""
     var avatarColor = "[]"
+    var backgroundColor : UIColor?
     
     //Actions
     @IBAction func unwindToChannel(_ sender: Any) { performSegue(withIdentifier: UNWIND, sender: nil)
@@ -30,6 +31,11 @@ class RegisterVC: UIViewController {
     }
     
     @IBAction func generateBackgroundColourPressed(_ sender: Any) {
+        let r = CGFloat(arc4random_uniform(255)) / 255
+        let g = CGFloat(arc4random_uniform(255)) / 255
+        let b = CGFloat(arc4random_uniform(255)) / 255
+        backgroundColor = UIColor(displayP3Red: r, green: g, blue: b, alpha: 1)
+        self.userProfile.backgroundColor = backgroundColor
     }
     
     @IBAction func createAccountPressed(_ sender: Any) {
@@ -54,6 +60,9 @@ class RegisterVC: UIViewController {
         if UserDataService.instance.avatarName != "" {
             userProfile.image = UIImage(named: UserDataService.instance.avatarName)
             avatarName = UserDataService.instance.avatarName
+            if avatarName.contains("light") && backgroundColor == nil {
+                userProfile.backgroundColor = UIColor.lightGray
+            }
         }
     }
 }
