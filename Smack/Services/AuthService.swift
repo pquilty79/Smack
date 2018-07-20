@@ -99,5 +99,20 @@ class AuthService {
             }
         }
     }
+    func createUser(name: String, email: String, avatarName: String, avatarColour: String, completion: @escaping CompletionHandler) {
+        let lowerCaseEmail = email.lowercased()
+        let body: [String: Any] = [
+            "name": name, "email": lowerCaseEmail, "avatarName": avatarName, "avatarColour": avatarColour
+        ]
+        let header = [
+            "Authorization":"Bearer \(AuthService.instance.authToken)",
+            "Content-Type" : "application/json; charset=utf-8"
+        ]
+        
+    }
+    
+    
+    
+    
     
 }

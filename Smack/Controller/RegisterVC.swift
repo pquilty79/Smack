@@ -17,11 +17,16 @@ class RegisterVC: UIViewController {
     @IBOutlet weak var passwordText: UITextField!
     @IBOutlet weak var userProfile: UIImageView!
     
+    
+    // Variables
+    var avatarName = ""
+    var avatarColor = "[]"
+    
     //Actions
     @IBAction func unwindToChannel(_ sender: Any) { performSegue(withIdentifier: UNWIND, sender: nil)
     }
     
-    @IBAction func chooseAvatarPressed(_ sender: Any) {
+    @IBAction func chooseAvatarPressed(_ sender: Any) { performSegue(withIdentifier: TO_AVATAR_PICKER, sender: nil)
     }
     
     @IBAction func generateBackgroundColourPressed(_ sender: Any) {
@@ -45,4 +50,10 @@ class RegisterVC: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        if UserDataService.instance.avatarName != "" {
+            userProfile.image = UIImage(named: UserDataService.instance.avatarName)
+            avatarName = UserDataService.instance.avatarName
+        }
+    }
 }
