@@ -30,3 +30,8 @@ let URL_LOGIN = "\(BASE_URL)account/login"
 let HEADER = [
     "Content-Type" : "application/json; charset=utf-8"
 ]
+// Colours
+let smackPurplePlaceHolder = #colorLiteral(red: 0.3631127477, green: 0.4045833051, blue: 0.8775706887, alpha: 0.5)
+
+// Notifications
+let NOTIF_USER_DATA_DID_CHANGE = Notification.Name("notifUserDataChanged")
