@@ -20,8 +20,8 @@ class RegisterVC: UIViewController {
     
     
     // Variables
-    var avatarName = ""
-    var avatarColor = "[]"
+    var avatarName = "profileDefault"
+    var avatarColour = "[0.5, 0.5, 0.5, 1]"
     var backgroundColor : UIColor?
     
     //Actions
@@ -43,15 +43,22 @@ class RegisterVC: UIViewController {
     
     @IBAction func createAccountPressed(_ sender: Any) {
         activityIndicator.isHidden = false
+        guard let name =  userNameText.text , userNameText.text != "" else { return }
         guard let email = emailText.text , emailText.text != "" else { return }
         guard let password = passwordText.text , passwordText.text != "" else { return }
-        AuthService.instance.registerUser(email: email, password: password) { (success) in if success {
-            AuthService.instance.loginUser(email: email, password: password) { (success) in if success {
-                    self.activityIndicator.isHidden = true
-                    self.unwindToChannel(self)
-                    NotificationCenter.default.post(name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
+        AuthService.instance.registerUser(email: email, password: password) { (success) in
+            if success {
+                AuthService.instance.loginUser(email: email, password: password, completion: { (success) in
+                    if success {
+                        AuthService.instance.createUser(name: name, email: email, avatarName: self.avatarName, avatarColour: self.avatarColour, completion: { (success) in
+                            if success {
+                                self.activityIndicator.isHidden = true
+                                self.performSegue(withIdentifier: UNWIND, sender: nil)
+                                NotificationCenter.default.post(name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
+                            }
+                        })
                     }
-                }
+                })
             }
         }
     }
